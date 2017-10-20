@@ -4,6 +4,8 @@
         $columns = implode(',', array_keys($fields));
         $values = implode(',', array_values($fields));
 
+        $stmt = $dbh->query("DELETE FROM {$table}");
+        $stmt = $dbh->query("ALTER TABLE {$table} AUTO_INCREMENT = 1");
         $stmt = $dbh->query("INSERT INTO {$table} ({$columns}) VALUES ({$values})");
     }
 
