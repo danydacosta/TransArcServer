@@ -12,7 +12,7 @@
     }
 
     //Retourne une array des regions
-    function FetchRegions($dbh){
+    function FetchRegionsFromDatabase($dbh){
         $stmt = $dbh->query('SELECT * FROM tbl_regions');
         $stmt->execute();
 
@@ -20,7 +20,7 @@
     }
 
     //Retourne une array des lignes pour une région donnée
-    function FetchLines($region){        
+    function FetchLinesFromWebsite($region){        
         $doc = new simple_html_dom();
         $doc->load(file_get_contents('http://www.transn.ch/reseau-horaires/'.$region.'.html'));
 
