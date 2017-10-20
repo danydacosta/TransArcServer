@@ -3,9 +3,6 @@
     function InsertInDatabase($dbh, $table, $fields){
         $columns = implode(',', array_keys($fields));
         $values = implode(',', array_values($fields));
-
-        $stmt = $dbh->query("DELETE FROM {$table}");
-        $stmt = $dbh->query("ALTER TABLE {$table} AUTO_INCREMENT = 1");
         $stmt = $dbh->query("INSERT INTO {$table} ({$columns}) VALUES ({$values})");
     }
 
@@ -19,14 +16,12 @@
 
     function FetchLines($region){        
         $doc = new simple_html_dom();
-        $doc->load(file_get_contents('http://www.transn.ch/reseau-horaires/',$region['urlname']));
+        $doc->load(file_get_contents('http://www.transn.ch/reseau-horaires/'.$region.'.html'));
 
         $array = array();
         foreach($doc->find('area[class=fancyboxmap]') as $element){
             $line = $element->getAttribute('ad-l');
-            if(end($array) !== $line){
-                array_push($array, $line);
-            }
+            end($array) !== $line && $line < 700 ? array_push($array, $line) : null;
         }
         return $array;
     }
