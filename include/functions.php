@@ -5,6 +5,11 @@
         $values = implode(',', array_values($fields));
         $stmt = $dbh->query("INSERT INTO {$table} ({$columns}) VALUES ({$values})");
     }
+    
+    function ClearTable($dbh, $table){
+        $stmt = $dbh->query("DELETE FROM {$table}");
+        $stmt = $dbh->query("ALTER TABLE {$table} AUTO_INCREMENT = 1");
+    }
 
     //Retourne une array des regions
     function FetchRegions($dbh){
@@ -14,6 +19,7 @@
         return $stmt->fetchAll();
     }
 
+    //Retourne une array des lignes pour une région donnée
     function FetchLines($region){        
         $doc = new simple_html_dom();
         $doc->load(file_get_contents('http://www.transn.ch/reseau-horaires/'.$region.'.html'));
