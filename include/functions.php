@@ -26,10 +26,8 @@
         $doc->load(file_get_contents($region));
 
         $array = array();
-        foreach($doc->find('select[id=ls] option') as $element){   
-            if($element->innertext !== 'Choisissez votre ligne'){
-                array_push($array, $element->innertext);
-            };
+        foreach($doc->find('select[id=ls] option') as $element){              
+            $element->innertext !== 'Choisissez votre ligne' ? array_push($array, $element->innertext) : null;
         }
         return $array;
     }
