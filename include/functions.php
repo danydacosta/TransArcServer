@@ -20,36 +20,17 @@
         return $stmt->fetchAll();
     }
 
-    //Retourne une array des lignes pour une région donnée
-    function FetchLinesFromWebsite($region){        
+    //Retourne une array de lignes-directions pour une région donnée
+    function FetchLinesAndDirectionsFromWebsite($region){
         $doc = new simple_html_dom();
-        $doc->load(file_get_contents('http://www.transn.ch/reseau-horaires/'.$region.'.html'));
+        $doc->load(file_get_contents($region));
 
         $array = array();
-        foreach($doc->find('area[class=fancyboxmap]') as $element){
-            $line = $element->getAttribute('ad-l');
-            end($array) !== $line && $line < 700 ? array_push($array, $line) : null;
+        foreach($doc->find('select[id=ls] option') as $element){   
+            if($element->innertext !== 'Choisissez votre ligne'){
+                array_push($array, $element->innertext);
+            };
         }
-        return $array;
-    }
-
-    //Retourne une array des directions pour une ligne donnée
-    function FetchDirectionsFromWebsite($region, $line){
-        $doc = new simple_html_dom();
-        $directionIndex = 1;
-
-        $array = array();
-        while($directionIndex <= 2){
-            $doc->load(file_get_contents('http://www.transn.ch/fr/reseau-horaires/'.$region.'.html?l='.$line.'&d='.$directionIndex));
-    
-            $element = $doc->find('div[class=titreline]');
-            array_push($array, $element[0]->innertext());
-
-            $directionIndex++;
-        }
-
-        echo 'Directions for region'.$region.' and line '.$line.':<br>';
-        var_dump($array);
         return $array;
     }
 
