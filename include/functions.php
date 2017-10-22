@@ -32,4 +32,17 @@
         return $array;
     }
 
+    //Retourne une array des arrêts pour un sens donné
+    function FetchStopsFromWebsite($region, $line, $directionNbr){
+        $doc = new simple_html_dom();
+        $doc->load(file_get_contents($region.'?l='.$line.'&d='.$directionNbr));
+
+        $array = array();
+        foreach($doc->find('div[id=timeline] div[class=stopname] a') as $element){      
+            $array[$element->innertext] = 'http://www.transn.ch'.$element->getAttribute('href');
+        }
+
+        return $array;
+    }
+
     
