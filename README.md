@@ -15,17 +15,17 @@ Afin de récupérer les informations de la BDD dans le but de les utiliser, il s
 
 ##### Regions :
 ```
-http://example.com/transarcserver/scripts/getRegions.php
+http://example.com/transarcserver/api/getRegions.php
 ```
 
 ##### Lignes/directions :
 ```
-http://example.com/transarcserver/scripts/getLinesDirections.php?numregion=ID DE LA REGION
+http://example.com/transarcserver/api/getLinesDirections.php?numregion=ID DE LA REGION
 ```
 
 ##### Arrêts :
 ```
-http://example.com/transarcserver/scripts/getStops.php?numlinedirection=ID DE LA LIGNE/DIRECTION
+http://example.com/transarcserver/api/getStops.php?numlinedirection=ID DE LA LIGNE/DIRECTION
 ```
 
 ##### Exemple de résultat :
