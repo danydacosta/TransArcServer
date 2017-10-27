@@ -1,10 +1,10 @@
 <?php
     //Connexion à la BDD
-    include_once('include/connect.php');
+    include_once('scripts/connect.php');
     //Library SimpleHTMLDom
-    include_once('include/simple_html_dom.php');
+    include_once('scripts/simple_html_dom.php');
     //Fichiers de fonctions
-    include_once('include/functions.php');
+    include_once('scripts/functions.php');
     
     //On vide les tables en attendant les nouvelles données
     ClearTable($dbh, 'tbl_lines_directions');
