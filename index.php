@@ -2,7 +2,7 @@
     //Connexion à la BDD
     include_once('scripts/connect.php');
     //Library SimpleHTMLDom
-    include_once('scripts/simple_html_dom.php');
+    include_once('lib/simple_html_dom.php');
     //Fichiers de fonctions
     include_once('scripts/functions.php');
     
@@ -33,10 +33,12 @@
                 if($lineDirections == '341 - Jardin Klaus - Verger' || $lineDirections == '341 - Verger - Place du Marché/Jardin Klaus'){
                     $urlLine = 343;
                 //Les autres lignes
-                } else {
-                    $urlLine = substr($lineDirections, 0, 3);
                 }
             }
+
+            //Enregistre la ligne courante
+            $urlLine = substr($lineDirections, 0, 3);
+
             //On enregistre la ligne courant comme étant la precedante dans la prochaine itération
             $previousLine = substr($lineDirections, 0, 3);
             
