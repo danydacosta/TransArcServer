@@ -29,6 +29,7 @@
         foreach($doc->find('select[id=ls] option') as $element){              
             $element->innertext !== 'Choisissez votre ligne' ? array_push($array, $element->innertext) : null;
         }
+        
         return $array;
     }
 

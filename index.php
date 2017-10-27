@@ -5,7 +5,8 @@
     include_once('include/simple_html_dom.php');
     //Fichiers de fonctions
     include_once('include/functions.php');
-      
+    
+    //On vide les tables en attendant les nouvelles données
     ClearTable($dbh, 'tbl_lines_directions');
     ClearTable($dbh, 'tbl_stops');
 
@@ -15,7 +16,6 @@
 
     //Loop dans les régions
     foreach(FetchTableFromDatabase($dbh, 'tbl_regions') as $region){
-        echo '<b>Lignes - directions pour la région '.$region['name'].'</b><br>';
         $directionIndex = 0;
         //Loop dans les lignes - directions
         foreach(FetchLinesAndDirectionsFromWebsite($region['url']) as $lineDirections){
@@ -40,12 +40,9 @@
             //On enregistre la ligne courant comme étant la precedante dans la prochaine itération
             $previousLine = substr($lineDirections, 0, 3);
             
-            echo '<b>'.$directionIndex.' | '.$lineDirections.'<br></b>';
             //Enregistre les lignes - directions dans la bdd
             InsertInDatabase($dbh, 'tbl_lines_directions', array('name' => $dbh->quote(addslashes($lineDirections)), 'numRegion' => $region['id']));
             $linesDirectionsIndex++;
-
-            echo '<h3>'.$urlLine.'</h3>';               
 
             //Apelle la fonction pour les arrêts.
             foreach(FetchStopsFromWebsite($region['url'], $urlLine, $directionIndex) as $stop => $url){
@@ -53,3 +50,5 @@
             }
         }
     }
+
+    echo '<h1>Terminé</h1>';
