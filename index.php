@@ -13,11 +13,11 @@
     $linesDirectionsIndex = 0;
     $urlLine = 0;
 
-    //Loop dans les régions ==> 1, 'Littoral & Val-de-Ruz', 'https://m.transn.ch/transports-publics-neuchatelois/reseau-horaires/littoral-val-de-ruz.html
+    //Loop dans les régions
     foreach(FetchTableFromDatabase($dbh, 'tbl_regions') as $region){
         echo '<b>Lignes - directions pour la région '.$region['name'].'</b><br>';
         $directionIndex = 0;
-        //Loop dans les lignes - directions ==> 102 - Temple des Valangines - Place Pury - Serrières
+        //Loop dans les lignes - directions
         foreach(FetchLinesAndDirectionsFromWebsite($region['url']) as $lineDirections){
             $directionIndex++;
             
@@ -29,8 +29,8 @@
                     $directionIndex = 1;
                 }
                 
-                //Ligne 341 (3, 4) -- A tester...
-                if($directionIndex > 2 && $previousLine == 341){
+                //Exception: Ligne 341 (3, 4) => ligne 343
+                if($lineDirections == '341 - Jardin Klaus - Verger' || $lineDirections == '341 - Verger - Place du Marché/Jardin Klaus'){
                     $urlLine = 343;
                 //Les autres lignes
                 } else {
@@ -43,7 +43,9 @@
             echo '<b>'.$directionIndex.' | '.$lineDirections.'<br></b>';
             //Enregistre les lignes - directions dans la bdd
             InsertInDatabase($dbh, 'tbl_lines_directions', array('name' => $dbh->quote(addslashes($lineDirections)), 'numRegion' => $region['id']));
-            $linesDirectionsIndex++;            
+            $linesDirectionsIndex++;
+
+            echo '<h3>'.$urlLine.'</h3>';               
 
             //Apelle la fonction pour les arrêts.
             foreach(FetchStopsFromWebsite($region['url'], $urlLine, $directionIndex) as $stop => $url){
