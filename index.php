@@ -46,6 +46,7 @@
 
             //Apelle la fonction pour les arrêts.
             foreach(FetchStopsFromWebsite($region['url'], $urlLine, $directionIndex) as $stop => $url){
+                //Enregistre l'arrêt ainsi que l'url du PDF correspondant dans la bdd
                 InsertInDatabase($dbh, 'tbl_stops', array('name' => $dbh->quote(addslashes($stop)), 'urlpdf' => $dbh->quote($url), 'numLinesDirections' => $linesDirectionsIndex));
             }
         }
