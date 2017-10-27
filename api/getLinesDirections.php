@@ -1,5 +1,5 @@
 <?php
-    include_once('connect.php');
+    include_once('../scripts/connect.php');
 
     if(isset($_GET['numregion'])){
         $stmt = $dbh->prepare('SELECT * FROM tbl_lines_directions WHERE numRegion = :numregion');
