@@ -1,4 +1,7 @@
 <?php
+    header('Access-Control-Allow-Origin: *');
+    header('Content-type: application/json');
+
     include_once('../scripts/connect.php');
 
     if(isset($_GET['numlinedirection'])){
