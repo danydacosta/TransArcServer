@@ -5,6 +5,12 @@
     include_once('lib/simple_html_dom.php');
     //Fichiers de fonctions
     include_once('scripts/functions.php');
+
+    //Mesure le temps de chargement de la page
+    $time = microtime();
+    $time = explode(' ', $time);
+    $time = $time[1] + $time[0];
+    $start = $time;
     
     //On vide les tables en attendant les nouvelles données
     ClearTable($dbh, 'tbl_lines_directions');
@@ -54,4 +60,9 @@
         }
     }
 
-    echo '<h1>Terminé</h1>';
+    $time = microtime();
+    $time = explode(' ', $time);
+    $time = $time[1] + $time[0];
+    $finish = $time;
+    $total_time = round(($finish - $start), 4);
+    echo '<h1>Terminé en '.$total_time.' secondes</h1>';
