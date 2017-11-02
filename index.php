@@ -43,13 +43,13 @@
             $previousLine = substr($lineDirections, 0, 3);
             
             //Enregistre les lignes - directions dans la bdd
-            InsertInDatabase($dbh, 'tbl_lines_directions', array('name' => $dbh->quote(addslashes($lineDirections)), 'numRegion' => $region['id']));
+            InsertInDatabase($dbh, 'tbl_lines_directions', array('name' => $dbh->quote($lineDirections), 'numRegion' => $region['id']));
             $linesDirectionsIndex++;
 
             //Apelle la fonction pour les arrêts.
             foreach(FetchStopsFromWebsite($region['url'], $urlLine, $directionIndex) as $stop => $url){
                 //Enregistre l'arrêt ainsi que l'url du PDF correspondant dans la bdd
-                InsertInDatabase($dbh, 'tbl_stops', array('name' => $dbh->quote(addslashes($stop)), 'urlpdf' => $dbh->quote($url), 'numLinesDirections' => $linesDirectionsIndex));
+                InsertInDatabase($dbh, 'tbl_stops', array('name' => $dbh->quote($stop), 'urlpdf' => $dbh->quote($url), 'numLinesDirections' => $linesDirectionsIndex));
             }
         }
     }
