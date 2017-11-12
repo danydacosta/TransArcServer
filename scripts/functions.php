@@ -1,4 +1,7 @@
 <?php
+    //Incluez ici votre fichier qui contiendra la clé API de Google dans une variable $key
+    include_once('key.php');
+
     //Insert un enregistrement dans une table
     function InsertInDatabase($dbh, $table, $fields){
         $columns = implode(',', array_keys($fields));
