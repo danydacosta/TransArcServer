@@ -65,5 +65,5 @@
         $url = str_replace(" ", "+", 'https://maps.googleapis.com/maps/api/place/queryautocomplete/json?input='.$stop.'&location='.$location.'&radius='.$radius.'&language=fr&key='.$key);
         $resp_json = json_decode(file_get_contents($url), true);
 
-        echo $resp_json['predictions'][0]['description'];
+        echo array_key_exists('description', $resp_json['predictions'][0]) ? $resp_json['predictions'][0]['description'] : 'null';
     }
