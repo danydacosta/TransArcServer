@@ -4,6 +4,8 @@
 
     include_once('../scripts/functions.php');
 
-    if(isset($_GET['origin']) && isset($_GET['destination']) && isset($_GET['line'])){
-        
+    //http://localhost/transarcserver/api/getNextBuses.php?originstop=Marin%20Gare&destinationstop=St-Honoré&canton=NE
+    if(isset($_GET['originstop']) && isset($_GET['destinationstop']) && isset($_GET['canton'])){
+        echo GetFullNameStop($_GET['originstop'], $_GET['canton']);
+        //echo GetFullNameStop($_GET['destinationstop'], $_GET['canton']);
     }
