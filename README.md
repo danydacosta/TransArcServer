@@ -1,6 +1,9 @@
 # TransArcServer
 Services web de l'application mobile [TransArc](https://github.com/danydacosta/TransArc).
 
+## Mise en route
+Placez dans un fichier `/scripts/key.php` la valeur de votre clé d'API Google comme ceci: `$key = 'YOUR_API_KEY'`
+
 ## Documentation
 Ce programme peuple une base de donnée avec les régions, lignes/directions ainsi que les arrêts du réseau des transports publiques de l'arc jurassien. Il contient également une API REST permettant de récupérer les informations sous format JSON.
 
