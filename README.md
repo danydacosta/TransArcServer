@@ -31,7 +31,7 @@ http://example.com/transarcserver/api/getLinesDirections.php?numregion=ID DE LA 
 http://example.com/transarcserver/api/getStops.php?numlinedirection=ID DE LA LIGNE/DIRECTION
 ```
 
-### Prochains bus d'un arrêt (Google API)
+#### Prochains bus d'un arrêt (Google API)
 ```
 http://example.com/transarcserver/api/ggetNextBuses.php?originstop=NOM DE L'ARRET&destinationstop=DERNIER ARRET DE LA LIGNE&canton=CODE DU CANTON
 ```
