@@ -48,3 +48,22 @@
 
         return $array;
     }
+
+    //Retourne l'arrêt concaténé avec sa localité
+    function GetFullNameStop($stop, $canton){
+        global $key;
+        $location = '';
+        $radius = '';
+
+        switch($canton){
+            case 'NE':
+                $location = '46.9515328,6.8874818';
+                $radius = '13000';
+            break;
+        }
+
+        $url = str_replace(" ", "+", 'https://maps.googleapis.com/maps/api/place/queryautocomplete/json?input='.$stop.'&location='.$location.'&radius='.$radius.'&language=fr&key='.$key);
+        $resp_json = json_decode(file_get_contents($url), true);
+
+        echo $resp_json['predictions'][0]['description'];
+    }
