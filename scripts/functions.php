@@ -67,3 +67,19 @@
 
         return array_key_exists('description', $resp_json['predictions'][0]) ? $resp_json['predictions'][0]['description'] : 'null';
     }
+
+    //Retourne l'heure du prochain bus
+    /*https://maps.googleapis.com/maps/api/directions/json?origin=Marin Gare, Marin-Epagnier, Suisse&destination=Cormondrèche, Grand'Rue, Corcelles-Cormondrèche, Suisse&region=ch&mode=transit&key=AIzaSyDgMMJFJ7O595aKEp6SEgsB9Zi5Rer58hE*/
+    function GetNextBus($array_params){
+        global $key;
+        $origin = $array_params['origin'];
+        $destination = $array_params['destination'];
+        $time = array_key_exists('time', $array_params) ? $array_params['time'] : null;
+
+        $url = 'https://maps.googleapis.com/maps/api/directions/json?origin='.urlencode($origin).'&destination='.urlencode($destination).'&region=ch&mode=transit&key='.$key;
+        $resp_json = json_decode(file_get_contents($url), true);
+
+        echo $url;
+        echo '<br />';
+        return $resp_json['routes'][0]['legs'][0]['departure_time']['text'];
+    }
