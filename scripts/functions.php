@@ -69,7 +69,7 @@
     }
 
     //Retourne l'heure du prochain bus
-    /*https://maps.googleapis.com/maps/api/directions/json?origin=Marin Gare, Marin-Epagnier, Suisse&destination=Cormondrèche, Grand'Rue, Corcelles-Cormondrèche, Suisse&region=ch&mode=transit&key=AIzaSyDgMMJFJ7O595aKEp6SEgsB9Zi5Rer58hE*/
+    /*https://maps.googleapis.com/maps/api/directions/json?origin=Marin Gare, Marin-Epagnier, Suisse&destination=Cormondrèche, Grand'Rue, Corcelles-Cormondrèche, Suisse&region=ch&mode=transit&key=*/
     function GetNextBus($array_params){
         global $key;
         $origin = $array_params['origin'];
